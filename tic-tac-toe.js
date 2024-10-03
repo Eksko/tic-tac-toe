@@ -42,8 +42,30 @@ function Board() {
 	return { getBoard, markCell, isEmpty, checkWinner };
 }
 
+function Game() {
+	const board = Board();
 
-	const getValue = () => value;
+	const players = [
+		{ id: 1, name: "Player one" },
+		{ id: 2, name: "Player two" },
+	];
 
-	return { getValue };
+	let activePlayer = players[0];
+
+	const getActivePlayer = () => activePlayer;
+
+	const switchTurn = () =>
+		(activePlayer = activePlayer === players[0] ? players[1] : players[0]);
+
+	const playTurn = (row, col) => {
+		if (!board.isEmpty(row, col)) return;
+		console.log(`${getActivePlayer().name} marks row - ${row}, col - ${col}`);
+		board.markCell(row, col, activePlayer.id);
+		board.checkWinner(row, col, activePlayer.id);
+		switchTurn();
+	};
+
+	return { board, getActivePlayer, switchTurn, playTurn };
 }
+
+const game = Game();

@@ -1,22 +1,19 @@
-const gameBoard = (function () {
-	const cols = 3;
-	const rows = 3;
-	const board = [];
-
-	for (let row = 0; row < rows; row++) {
-		board[row] = [];
-		for (let col = 0; col < cols; col++) {
-			board[row].push(Cell());
-		}
-	}
+function Board() {
+	const board = [
+		[0, 0, 0],
+		[0, 0, 0],
+		[0, 0, 0],
+	];
 
 	const getBoard = () => board;
+	const isEmpty = (x, y) => board[x][y] === 0;
+	const markCell = (x, y, value) => {
+		board[x][y] = value;
+	};
 
-	return { getBoard };
-})();
+	return { getBoard, markCell, isEmpty };
+}
 
-function Cell() {
-	let value;
 
 	const getValue = () => value;
 
